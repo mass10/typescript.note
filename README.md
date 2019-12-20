@@ -3,5 +3,5 @@
 ```
 yarn init
 yarn add typescript
-touch tsconfig.json
+yarn tsc --init
 ```
