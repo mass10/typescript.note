@@ -9,7 +9,6 @@ function _rpad(s: string, len: number): string {
 	return s;
 }
 
-
 function _get_date(): string {
 
 	const now = new Date();
@@ -29,6 +28,8 @@ function _main() {
 
 	const now = new Date();
 
+	console.log("[TRACE] " + now.toDateString());
+	console.log("[TRACE] " + now.toISOString());
 	console.log("[TRACE] " + now);
 	console.log("[TRACE] " + _get_date());
 }
