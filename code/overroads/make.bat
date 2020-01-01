@@ -1,0 +1,1 @@
+@yarn tsc main.ts
