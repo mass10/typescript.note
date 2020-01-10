@@ -4,10 +4,8 @@ type application_common_parameter = {
 	description: string
 };
 
-// アプリケーションクラス
 class application {
 
-	// アプリケーションクラスのエントリーポイントです。ここから始まるストーリー。
 	public run(s: application_common_parameter) {
 		console.log("[TRACE] ", s);
 	}
