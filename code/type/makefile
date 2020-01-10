@@ -1,2 +1,2 @@
 default:
-	@tsc
+	@yarn tsc
