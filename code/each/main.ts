@@ -2,17 +2,11 @@ module main {
 
 	export function main(): void {
 
-		console.log("[TRACE] ### START ###");
-
 		const list = ["aaa", "bbb", "ccc"];
-
-		console.log("[TRACE] list:", list);
-
+		console.log("%s", list);
 		list.forEach((e, i) => {
-			console.log(i, e);
+			console.log("[%s] ... [%s]", i, e);
 		});
-
-		console.log("[TRACE] Ok.");
 	}
 }
 
