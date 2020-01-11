@@ -1,59 +1,62 @@
-/**
- * string のリスト
- */
-interface IStringList {
-	[index: number]: string;
-}
+module case01 {
 
-/**
- * ユーザー情報
- */
-interface User {
-	id: string;
-	name: string;
-	address: string;
-	phone: string;
-	email: string;
-}
-
-/**
- * ユーザー情報管理リスト
- */
-class UserList {
-
-	private _core: User[] = [];
-
-	public add(user: User) {
-		this._core.push(user);
+	/**
+	 * string のリスト
+	 */
+	interface IStringList {
+		[index: number]: string;
 	}
 
-	public get(index: number): User {
-		return this._core[index];
-	}
+	export function run() {
 
-	public size(): number {
-		return this._core.length;
-	}
-
-	// こういうのができない
-	// [position: number]: string {
-	//	return ...
-	// }
-}
-
-export function main() {
-
-	// 
-	{
 		let array: IStringList = ["Bob", "Fred"];
 
 		console.log(array[0]);
 		console.log(array[1]);
 		console.log(array[2]);
 	}
+}
 
-	// 独自のリストクラス
-	{
+module case02 {
+
+	/**
+	 * ユーザー情報
+	 */
+	interface User {
+		id: string;
+		name: string;
+		address: string;
+		phone: string;
+		email: string;
+	}
+
+	/**
+	 * ユーザー情報管理リスト
+	 */
+	class UserList {
+
+		private _core: User[] = [];
+
+		public add(user: User) {
+			this._core.push(user);
+		}
+
+		public get(index: number): User {
+			return this._core[index];
+		}
+
+		public size(): number {
+			return this._core.length;
+		}
+
+		// こういうのができない
+		// [position: number]: string {
+		//	return ...
+		// }
+	}
+
+	export function run() {
+
 		const users = new UserList();
 
 		users.add({ email: "jimi.hendrix@gmail.com", id: "dummy", name: "Jimi Hendrix",
@@ -65,6 +68,14 @@ export function main() {
 		// console.log(users[1]); ✖ダメ
 		// console.log(users[2]); ✖ダメ
 	}
+}
+
+export function main() {
+
+	// array に number インデクサを付ける例
+	case01.run();
+	// 独自クラスにインデクサを付けられない例
+	case02.run();
 }
 
 main();
