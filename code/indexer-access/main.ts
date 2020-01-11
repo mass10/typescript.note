@@ -70,12 +70,15 @@ module case02 {
 	}
 }
 
-export function main() {
+module main {
 
-	// array に number インデクサを付ける例
-	case01.run();
-	// 独自クラスにインデクサを付けられない例
-	case02.run();
+	export function run() {
+
+		// array に number インデクサを付ける例
+		case01.run();
+		// 独自クラスにインデクサを付けられない例
+		case02.run();
+	}
 }
 
-main();
+main.run();
