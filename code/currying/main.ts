@@ -20,6 +20,12 @@ module Lib {
 		};
 		return printer;
 	}
+
+	export function byBase(n: number) {
+		return function (x: number): number {
+			return n * x;
+		};
+	}
 }
 
 module Main {
@@ -40,6 +46,12 @@ module Main {
 			printer("コニチハ");
 			printer("コニチハ");
 			printer("コニチハ");
+		}
+
+		{
+			const operation = Lib.byBase(2);
+			// Shows [ 20, 40, 60 ].
+			console.log([10, 20, 30].map(operation));
 		}
 	}
 }
