@@ -16,4 +16,4 @@ yarn tsc
 
 | リンク | 説明 |
 |-|-|
-|https://basarat.gitbook.io/typescript/||
+|https://basarat.gitbook.io/typescript/|TypeScript Deep Dive ([日本語訳はこちら](https://typescript-jp.gitbook.io/deep-dive/))|
