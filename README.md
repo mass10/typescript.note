@@ -11,3 +11,9 @@ yarn tsc --init
 ```
 yarn tsc
 ```
+
+# メモ
+
+| リンク | 説明 |
+|-|-|
+|https://basarat.gitbook.io/typescript/||
