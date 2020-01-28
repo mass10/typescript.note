@@ -97,7 +97,7 @@ module case02 {
 			"Zakk Wylde"
 		];
 
-		const handler2 = function(e: string) {
+		const handler2 = function (e: string) {
 			if (0 <= e.indexOf("e")) {
 				console.log("Hit! [%s] contains \"e\"", e);
 				return true;
