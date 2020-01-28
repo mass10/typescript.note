@@ -1,1 +1,1 @@
-@yarn node main.js
+@yarn node dist/main.js
