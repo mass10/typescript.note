@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import { root } from "./controllers";
 import { hello1 } from "./controllers/hello1";
 import { dashboard } from "./controllers/dashboard";
