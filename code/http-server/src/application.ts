@@ -1,6 +1,6 @@
 import express from "express";
-import { root } from "./controllers";
-import { hello1 } from "./controllers/hello1";
+import { root } from "./controllers/index";
+import { account } from "./controllers/account";
 import { dashboard } from "./controllers/dashboard";
 
 /**
@@ -19,8 +19,9 @@ export class MyApplication {
 
 		app.use("/static", express.static("public"));
 
+		
 		app.get("/", root.get);
-		app.get("/hello1", hello1.get);
+		app.get("/account", account.get);
 		app.get("/dashboard", dashboard.get);
 
 		app.listen(8081, "127.0.0.1");

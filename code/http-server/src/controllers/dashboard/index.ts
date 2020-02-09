@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 /**
  * /dashboard/ へのリクエストを扱うモジュールです。
  */
-export module dashboard {
+export namespace dashboard {
 
 	/**
 	 * GET /dashboard/ のコントローラー定義です。

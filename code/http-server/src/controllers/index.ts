@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 /**
  * / へのリクエストを扱うモジュールです。
  */
-export module root {
+export namespace root {
 
 	/**
 	 * GET / のコントローラー定義です。

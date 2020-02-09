@@ -1,4 +1,4 @@
-import { MyApplication } from './MyApplication';
+import { MyApplication } from './application';
 
 /**
  * エントリーポイントを定義するモジュールです。

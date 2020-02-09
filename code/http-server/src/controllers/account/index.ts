@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
 
 /**
- * /hello1/ へのリクエストを扱うモジュールです。
+ * /account/ へのリクエストを扱うモジュールです。
  */
-export module hello1 {
+export namespace account {
 
 	/**
-	 * GET /hello1/ のコントローラー定義です。
+	 * GET /account/ のコントローラー定義です。
 	 * @param req リクエストオブジェクト
 	 * @param res レスポンスオブジェクト
 	 */
 	export const get = (req: Request, res: Response) => {
-		res.render("hello1/index.html.ejs", {});
+		res.render("account/index.html.ejs", {});
 	};
 }
