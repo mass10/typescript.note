@@ -1,4 +1,4 @@
-import { writeFileSync, appendFileSync } from "fs";
+import { appendFileSync } from "fs";
 
 module Lib {
 
