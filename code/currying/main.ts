@@ -28,10 +28,17 @@ module Lib {
 	}
 }
 
+/**
+ * メインのアプリケーションモジュール
+ */
 module Main {
 
+	/**
+	 * エントリーポイント
+	 */
 	export function run() {
 
+		// 標準出力を利用した文字列出力の動作確認。
 		{
 			const printer = Lib.getPrinter(console);
 			printer("コニチハ");
@@ -40,6 +47,7 @@ module Main {
 			printer("コニチハ");
 		}
 
+		// ファイルを利用した文字列出力の動作確認。
 		{
 			const printer = Lib.getPrinter2("log");
 			printer("コニチハ");
@@ -48,6 +56,7 @@ module Main {
 			printer("コニチハ");
 		}
 
+		// 繰り返す演算を少し簡単にする例。
 		{
 			const operation = Lib.byBase(2);
 			// Shows [ 20, 40, 60 ].
