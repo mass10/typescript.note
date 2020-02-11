@@ -9,9 +9,16 @@ enum Instrument {
 	mandolin
 }
 
+function getInstrumentLabel(unknown: Instrument): string {
+
+	const label = Instrument[unknown];
+	return label ?? "";
+}
+
 function trace(unknown: Instrument): void {
 
-	console.log("[TRACE] %d %s", unknown, Instrument[unknown]);
+	const label = getInstrumentLabel(unknown);
+	console.log("[TRACE] value: [%d], label: [%s]", unknown, label);
 }
 
 function main() {
