@@ -31,6 +31,9 @@ export namespace util {
 			" " + zero_pad("" + hour, 2) + ":" + zero_pad("" + minutes, 2) + ":" + zero_pad("" + seconds, 2) + "." + zero_pad("" + milliseconds, 3);
 	}
 
+	/**
+	 * true を返します。
+	 */
 	export function getTrue(): boolean {
 
 		return true;
