@@ -1,7 +1,7 @@
 import { MyApplication } from './application';
 
 /**
- * エントリーポイントを定義するモジュールです。
+ * エントリーポイントを定義する名前空間です。
  */
 module Main {
 

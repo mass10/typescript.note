@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 /**
- * /dashboard/ へのリクエストを扱うモジュールです。
+ * /dashboard/ へのリクエストを扱う名前空間です。
  */
 export namespace dashboard {
 

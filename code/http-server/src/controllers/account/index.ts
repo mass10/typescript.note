@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 /**
- * /account/ へのリクエストを扱うモジュールです。
+ * /account/ へのリクエストを扱う名前空間です。
  */
 export namespace account {
 

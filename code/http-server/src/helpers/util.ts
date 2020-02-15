@@ -1,14 +1,21 @@
 export namespace util {
 
-	export function rpad(s: string, len: number): string {
+	/**
+	 * 文字列の先頭を0埋めします。
+	 * @param s 文字列
+	 * @param len 要求する長さ
+	 */
+	export function zero_pad(s: string, len: number): string {
 
-		s = "" + s;
 		while (s.length < len) {
 			s = "0" + s;
 		}
 		return s;
 	}
 
+	/**
+	 * タイムスタンプ文字列を返します。
+	 */
 	export function getTimestamp(): string {
 
 		const now = new Date();
@@ -20,8 +27,8 @@ export namespace util {
 		const seconds = now.getSeconds();
 		const milliseconds = now.getMilliseconds();
 
-		return "" + rpad("" + year, 4) + "-" + rpad("" + month, 2) + "-" + rpad("" + day, 2) +
-			" " + rpad("" + hour, 2) + ":" + rpad("" + minutes, 2) + ":" + rpad("" + seconds, 2) + "." + rpad("" + milliseconds, 3);
+		return "" + zero_pad("" + year, 4) + "-" + zero_pad("" + month, 2) + "-" + zero_pad("" + day, 2) +
+			" " + zero_pad("" + hour, 2) + ":" + zero_pad("" + minutes, 2) + ":" + zero_pad("" + seconds, 2) + "." + zero_pad("" + milliseconds, 3);
 	}
 
 	export function getTrue(): boolean {

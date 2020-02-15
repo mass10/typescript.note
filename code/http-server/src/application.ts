@@ -9,6 +9,13 @@ import { dashboard } from "./controllers/dashboard";
 export class MyApplication {
 
 	/**
+	 * コンストラクター
+	 */
+	public constructor() {
+
+	}
+
+	/**
 	 * アプリケーションを起動します。
 	 */
 	public run(): void {

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { util } from "../helpers/util";
 
 /**
- * / へのリクエストを扱うモジュールです。
+ * / へのリクエストを扱う名前空間です。
  */
 export namespace root {
 
