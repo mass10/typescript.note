@@ -6,8 +6,8 @@ function main() {
 	hoxy.createServer({
 		reverse: 'http://localhost:3000',
 		tls: {
-			key: fs.readFileSync('path/to/my-server.key.pem),
-			cert: fs.readFileSync('path/to/my-server.crt.pem')
+			key: fs.readFileSync("path/to/my-server.key.pem"),
+			cert: fs.readFileSync("path/to/my-server.crt.pem")
 		}
 	}).listen(443);
 }
