@@ -1,3 +1,5 @@
+import hoxy from "hoxy";
+
 function main() {
 
 	console.log("### start ###");
