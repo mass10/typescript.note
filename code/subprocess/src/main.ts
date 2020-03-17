@@ -2,6 +2,7 @@
 import child_process from "child_process";
 
 function process_handler(error: child_process.ExecException | null, stdout: string, stderr: string): void {
+
 	console.log("[TRACE] ERROR:", error);
 	console.log("[TRACE] STDOUT:", stdout);
 	console.log("[TRACE] STDERR:", stderr);
@@ -9,16 +10,23 @@ function process_handler(error: child_process.ExecException | null, stdout: stri
 
 function build_go(): boolean {
 
-	const process = child_process.exec("go build hello.go", process_handler);
-	console.log("[TRACE] ", process);
+	const process = child_process.execSync("go build hello.go");
+	console.log("[TRACE] BUILD: ", process.toString());
 	return process != null;
+}
+
+function call(path: string): string {
+
+	const response = child_process.execSync(path);
+	return response.toString();
 }
 
 function call_hello(): boolean {
 
-	const process = child_process.exec("hello.exe", process_handler);
-	console.log("[TRACE] ", process);
-	return process != null;
+	const response = call("hello.exe");
+	console.log("[TRACE] ", response);
+	if (response) return true;
+	return false;
 }
 
 function main(): void {
