@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Node server (with TypeScript)</title>
+		<meta charset="utf-8">
+		<script>
+			function onclickSend1() {
+				console.log("[TRACE] CLICK");
+				var resopnse = window.__MyApp1Object ? window.__MyApp1Object.send("chennel-1", "hello!!! this is web site!") : "ダメ";
+				console.log("[TRACE] RESPONSE: ", resopnse);
+			}
+		</script>
+	</head>
+	<body>
+		<h1><a style="text-decoration: none; color: #000000" href="/">ウェブサイト</a></h1>
+		<hr>
+		<%=timestamp%>
+		<hr>
+		<a href="javascript: onclickSend1()">Electron 本体側にメッセージを送信します</a>
+		<script>
+			console.log("[TRACE]", window);
+		</script>
+	</body>
+</html>
