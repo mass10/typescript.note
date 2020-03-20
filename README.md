@@ -101,3 +101,6 @@ node_modules/electron/electron.d.ts:7995:29 - error TS2689: Cannot extend an int
 yarn remove @types/node
 yarn add -D @types/node@12
 ```
+
+### 参考
+- https://github.com/electron/electron/issues/21612
