@@ -5,9 +5,13 @@
 		<meta charset="utf-8">
 		<script>
 			function onclickSend1() {
-				console.log("[TRACE] CLICK");
-				var resopnse = window.__MyApp1Object ? window.__MyApp1Object.send("chennel-1", "hello!!! this is web site!") : "ダメ";
-				console.log("[TRACE] RESPONSE: ", resopnse);
+				console.log("[TRACE] <index.html> CLICK!");
+				var response = window.__MyApp1Object.send("renderer-to-main", "hello!!! this is web site!");
+				console.log(response);
+			}
+
+			function rendererEventHandler(event, message) {
+				console.log("[TRACE] <index.html> RECV!", event, message);
 			}
 		</script>
 	</head>
@@ -18,7 +22,8 @@
 		<hr>
 		<a href="javascript: onclickSend1()">Electron 本体側にメッセージを送信します</a>
 		<script>
-			console.log("[TRACE]", window);
+			console.log("[TRACE] <index.html>", window);
+			window.__MyApp1Object.registerRecvHandler("main-to-renderer", rendererEventHandler);
 		</script>
 	</body>
 </html>
