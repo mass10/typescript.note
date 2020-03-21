@@ -1,1 +1,2 @@
+@SETLOCAL
 @CALL yarn tsc
