@@ -1,5 +1,8 @@
 import { MyApplication } from "./application";
 
+/**
+ * エントリーポイント
+ */
 function main(): void {
 
 	console.log("[TRACE] <main> ### begin ###");
