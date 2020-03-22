@@ -27,6 +27,24 @@ namespace EXPOSED {
 	}
 
 	/**
+	 * Main プロセスに文字列を送信します。
+	 * 
+	 * @param channel チャネルの名称
+	 * @param message 文字列
+	 */
+	export function send2(channel: string, message: string): void {
+
+		try {
+			console.log("[TRACE] <exposed.send2()> SEND-ASYNC. channel: [" + channel + "], message: [" + message + "]");
+			// 非同期(応答なし)
+			electron.ipcRenderer.send(channel, message);
+		}
+		catch (e) {
+			console.log("[ERROR] <exposed.send()> SEND ERROR" + e);
+		}
+	}
+
+	/**
 	 * IPC メッセージハンドラーを登録します。
 	 * 
 	 * @param channel チャネルの名称
