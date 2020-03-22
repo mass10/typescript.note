@@ -5,11 +5,11 @@
 # how to build
 
 ```
-YOUR DIRECTORY> .make.bat
+CMD> .make.bat
 ```
 
 # How to run
 
 ```
-YOUR DIRECTORY> .run.bat
+CMD> .run.bat
 ```
