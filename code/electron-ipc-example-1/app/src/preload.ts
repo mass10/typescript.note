@@ -12,12 +12,8 @@ namespace EXPOSED {
 
 		try {
 			console.log("[TRACE] <exposed.send()> SEND. channel: [" + channel + "], message: [" + message + "]");
-			// 非同期(応答なし)
-			// electron.ipcRenderer.send(channel, message);
 			// 同期(応答あり)
 			const response = electron.ipcRenderer.sendSync(channel, message);
-			// newer operation ??
-			// electron.ipcRenderer.invoke(channel, message);
 			return response;
 		}
 		catch (e) {
