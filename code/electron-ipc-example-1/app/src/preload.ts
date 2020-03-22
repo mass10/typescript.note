@@ -1,6 +1,6 @@
 import electron from "electron";
 
-namespace PRELOAD {
+namespace EXPOSED {
 
 	function send(channel: string, unknown: any): string {
 
@@ -26,6 +26,9 @@ namespace PRELOAD {
 		console.log("[TRACE] <registerRecvHandler()> ウェブアプリケーションからイベントハンドラ－が設定されました！", handler);
 		electron.ipcRenderer.on(channel, handler);
 	}
+}
+
+namespace PRELOAD {
 
 	// function rendererEventhandler(event: electron.IpcRendererEvent, ...args: any[]): void {
 	// 	console.log("[TRACE] <WWW.send()> RECV: ", JSON.stringify(args));
