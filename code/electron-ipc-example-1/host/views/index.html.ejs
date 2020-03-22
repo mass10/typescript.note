@@ -3,11 +3,12 @@
 	<head>
 		<title>Node server (with TypeScript)</title>
 		<meta charset="utf-8">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'unsafe-inline';" />
 		<script>
 			function onclickSend1() {
 				console.log("[TRACE] <index.html> CLICK!");
 				var response = window.__MyApp1Object.send("renderer-to-main", "hello!!! this is web site!");
-				console.log(response);
+				console.log("[TRACE] <index.html> RESPONSE:", response);
 			}
 
 			function rendererEventHandler(event, message) {
