@@ -1,0 +1,12 @@
+{
+  "name": "curl",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^13.9.3",
+    "@types/node-fetch": "^2.5.5",
+    "node-fetch": "^2.6.0",
+    "typescript": "^3.8.3"
+  }
+}
