@@ -1,3 +1,6 @@
+# 結果
+
+```
 yarn node v1.19.2
 [TRACE] <main()> ### start ###
 [TRACE] <test1()> $$$ start $$$
@@ -9,3 +12,4 @@ yarn node v1.19.2
 [TRACE] <test2()> [aaa]
 [TRACE] <main()> --- end ---
 Done in 0.15s.
+```
