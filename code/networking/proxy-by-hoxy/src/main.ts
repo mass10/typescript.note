@@ -1,5 +1,5 @@
 import fs from "fs";
-var hoxy = require('hoxy');
+import hoxy from "hoxy";
 
 function main() {
 
