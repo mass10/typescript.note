@@ -1,0 +1,12 @@
+{
+  "name": "Option",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "tsc": "^1.20150623.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  }
+}
