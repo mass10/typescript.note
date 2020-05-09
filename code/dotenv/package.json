@@ -1,0 +1,20 @@
+{
+  "name": "dotenv",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "local": "cross-env NODE_ENV=local node dist/main.js",
+    "development": "cross-env NODE_ENV=development node dist/main.js",
+    "staging": "cross-env NODE_ENV=staging node dist/main.js",
+    "production": "cross-env NODE_ENV=production node dist/main.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.0",
+    "cross-env": "^7.0.2"
+  }
+}

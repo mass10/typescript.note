@@ -1,7 +1,7 @@
 /**
- * 
+ *
  */
-module Case01 {
+export module Case01 {
 
 	class Prefecture {
 
@@ -9,7 +9,7 @@ module Case01 {
 
 		}
 
-		private static readonly prefecturesMap: {[key: string]: string} = {
+		private static readonly prefecturesMap: { [key: string]: string } = {
 			"01": "北海道",
 			"02": "青森県",
 			"03": "岩手県",
@@ -59,69 +59,73 @@ module Case01 {
 			"47": "沖縄県"
 		}
 
+		/**
+		 * 都道府県名を ID でひきます。
+		 *
+		 * @param prefectureId 
+		 */
 		public static getPrefectureName(prefectureId: string): string {
+
 			return Prefecture.prefecturesMap[prefectureId] ?? "";
 		}
 	}
 
+	/**
+	 * 都道府県名を調べます。
+	 *
+	 * @param id 
+	 */
 	function debugPrefectureId(id: string): void {
+
 		const name = Prefecture.getPrefectureName(id);
 		console.log("[TARCE] id: [" + id + "], name: [" + name + "]");
 	}
 
 	export function run() {
 
-		debugPrefectureId("00");
-		debugPrefectureId("01");
-		debugPrefectureId("02");
-		debugPrefectureId("47");
-		debugPrefectureId("48");
+		// ID から名前をひくテスト
+		{
+			debugPrefectureId("00");
+			debugPrefectureId("01");
+			debugPrefectureId("02");
+			debugPrefectureId("47");
+			debugPrefectureId("48");
+			debugPrefectureId("");
+			debugPrefectureId("XX");
+		}
+
+		// 列挙するテスト(Map)
+		{
+			console.log("[TARCE] $$$ 列挙するテスト(Map) $$$");
+			const prefs = new Map<string, string>();
+			prefs.set("01", "北海道");
+			prefs.set("02", "青森県");
+			prefs.set("03", "岩手県");
+			prefs.set("04", "宮城県");
+			prefs.set("05", "秋田県");
+			prefs.set("06", "山形県");
+			prefs.forEach((value: string, key: string) => {
+				console.log(`[TRACE] key: [${key}], value: [${value}]`);
+			});
+		}
+
+		// 列挙するテスト(map)
+		{
+			console.log("[TARCE] $$$ 列挙するテスト(mapped type) $$$");
+			const prefs: { [key: string]: string } = {
+				"01": "北海道",
+				"02": "青森県",
+				"03": "岩手県",
+				"04": "宮城県",
+				"05": "秋田県",
+				"06": "山形県"
+			};
+			for (const key in prefs) {
+				const value = prefs[key];
+				console.log(`[TRACE] key: [${key}], value: [${value}]`);
+			}
+
+			console.log();
+		}
 	}
 }
-
-/**
- * 配列を dereference する例 [TRYING]
- * 
- * [状況]
- * できない
- */
-module Case02 {
-
-	export function _test(...args: any[]) {
-
-		var [...others] = args;
-
-		// 希望: ばらばらに渡したような挙動をしてほしい
-		// 結果: 配列を渡した挙動になってしまう
-		console.log("[TARCE]", others);
-	}
-
-	export function run() {
-
-		_test(1, 2, "bbb");
-	}
-}
-
-/**
- * メイン
- */
-module Main {
-
-	/**
-	 * エントリーポイント
-	 */
-	export function main() {
-
-		/**
-		 * 
-		 */
-		Case01.run();
-
-		/**
-		 * 配列を dereference できるか
-		 */
-		Case02.run();
-	}
-}
-
-Main.main();

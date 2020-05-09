@@ -11,12 +11,21 @@ class MyJob {
 	}
 
 	public run(): void {
-		const name = this.getName();
+		const name = this ? this.getName() : "unknown";
 		console.log(`[TRACE] (${name}) が呼ばれました`);
+	}
+
+	public echo(text: string): void {
+		const name = this ? this.getName() : "unknown";
+		console.log(`[TRACE] (${name}) >> ${text}`);
 	}
 }
 
-export function main(): void {
+function invoke(handler: () => void): void {
+	handler();
+}
+
+function main(): void {
 	const app = new MyJob("あだち充");
 	setTimeout(app.run.bind(app), 10); // SAFE.
 	setTimeout(app.run, 10); // throws.
