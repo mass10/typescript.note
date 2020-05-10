@@ -1,0 +1,9 @@
+{
+    "name": "regex",
+    "version": "1.0.0",
+    "main": "dist/Main.js",
+    "license": "MIT",
+    "devDependencies": {
+        "typescript": "^3.8.3"
+    }
+}
