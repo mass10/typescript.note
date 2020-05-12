@@ -14,7 +14,13 @@ class Logger {
 	public static trace(...args: any[]): void {
 		try {
 			const error = new Error();
-			console.log("(オブジェクト)", error);
+			const description = `${error?.stack}`;
+			const matched = description.match(/[ \t]+(at [a-zA-Z\.-_]+ \([a-zA-Z\.-_]+\))/g);
+			if (matched) {
+				for (const e of matched) {
+					console.log(`[TRACE] matched: [${e}]`);
+				}
+			}
 		}
 		catch (e) {
 
