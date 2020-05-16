@@ -9,14 +9,14 @@ function getStackFrame(): string {
 	const description = `${error?.stack}`;
 
 	// 呼び出しフレームの3つめだけを取り出します。
-	const matched1 = description.match(/[ \t]+(at [a-zA-Z\.-_]+ \([a-zA-Z\.-_]+\))/g);
-	if (!matched1) {
+	var matched = description.match(/[ \t]+(at [a-zA-Z\.-_]+ \([a-zA-Z\.-_]+\))/g);
+	if (!matched) {
 		return "unknown unknown";
 	}
-	if (matched1.length < 3) {
+	if (matched.length < 3) {
 		return "unknown unknown";
 	}
-	const text = matched1[2];
+	const text = matched[2];
 
 	// 終端のファイル名部分を取り出します。
 	var matched = text.match(/[a-zA-Z_]+\.js:[0-9]+/g);
