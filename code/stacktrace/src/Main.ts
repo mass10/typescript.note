@@ -9,7 +9,7 @@ function getStackFrame(): string {
 	const description = `${error?.stack}`;
 
 	// 呼び出しフレームの3つめだけを取り出します。
-	var matched = description.match(/[ \t]+(at [a-zA-Z\.-_]+ \([a-zA-Z\.-_]+\))/g);
+	var matched = description.match(/[ \t]+at [a-zA-Z\.-_]+ \([a-zA-Z\.-_]+\)/g);
 	if (!matched) {
 		return "unknown unknown";
 	}
