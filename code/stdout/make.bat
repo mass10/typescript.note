@@ -1,2 +1,3 @@
-@yarn install
-@yarn tsc
+@SETLOCAL
+@CALL yarn install
+@CALL yarn tsc

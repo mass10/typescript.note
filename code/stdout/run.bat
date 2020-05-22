@@ -1,1 +1,2 @@
-@yarn node index.js
+@SETLOCAL
+@CALL yarn node dist\index.js
