@@ -1,7 +1,7 @@
 /**
  * 可変引数の取り扱いについて
  */
-export module Case04 {
+export module VarargsTest {
 
 	function test1(...args: any[]): void {
 		test2(...args);

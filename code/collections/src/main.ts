@@ -1,7 +1,8 @@
-import { Case01 } from "./map/Case01";
-import { Case02 } from "./array/Case02";
-import { Case03 } from "./array/Case03";
-import { Case04 } from "./array/Case04";
+import { TestPureStringMap } from "./map/TestPureStringMap";
+import { TestStringMap } from "./map/TestStringMap";
+import { ArraySpreadingTest } from "./array/ArraySpreadingTest";
+import { ArrrayTest } from "./array/ArrayTest";
+import { VarargsTest } from "./array/VarargsTest";
 
 /**
  * メイン
@@ -13,16 +14,20 @@ module Main {
 	 */
 	export function main() {
 
-		//
-		if (false) Case01.run();
+		// { [key: string]string } の扱い
+		if (false) TestPureStringMap.run();
+
+		// Map<string, string> の扱い
+		if (false) TestStringMap.run();
 
 		// 配列を dereference できるか
-		if (false) Case02.run();
+		if (false) ArraySpreadingTest.run();
 
 		// 配列のまわしかた
-		if (false) Case03.run();
+		if (false) ArrrayTest.run();
 		
-		Case04.run();
+		// 可変個引数に扱い
+		if (true) VarargsTest.run();
 	}
 }
 

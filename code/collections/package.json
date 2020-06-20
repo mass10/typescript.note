@@ -1,7 +1,7 @@
 {
   "name": "array",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/Main.js",
   "license": "MIT",
   "dependencies": {
     "typescript": "^3.7.4"

@@ -1,15 +1,18 @@
 /**
- *
+ * { [key: string]: string } の扱いについて
  */
-export module Case01 {
+export module TestPureStringMap {
 
+	/**
+	 * 都道府県関連情報の操作を提供します。
+	 */
 	class Prefecture {
 
 		private constructor() {
 
 		}
 
-		private static readonly prefecturesMap: { [key: string]: string } = {
+		private static readonly _prefectures: { [key: string]: string } = {
 			"01": "北海道",
 			"02": "青森県",
 			"03": "岩手県",
@@ -60,13 +63,21 @@ export module Case01 {
 		}
 
 		/**
+		 * 都道府県一覧を返します。
+		 */
+		public static enumPrefectures(): { [key: string]: string } {
+
+			return Prefecture._prefectures;
+		}
+
+		/**
 		 * 都道府県名を ID でひきます。
 		 *
 		 * @param prefectureId 
 		 */
 		public static getPrefectureName(prefectureId: string): string {
 
-			return Prefecture.prefecturesMap[prefectureId] ?? "";
+			return Prefecture._prefectures[prefectureId] ?? "";
 		}
 	}
 
@@ -75,7 +86,7 @@ export module Case01 {
 	 *
 	 * @param id 
 	 */
-	function debugPrefectureId(id: string): void {
+	function tryFindPrefectureById(id: string): void {
 
 		const name = Prefecture.getPrefectureName(id);
 		console.log("[TARCE] id: [" + id + "], name: [" + name + "]");
@@ -85,43 +96,21 @@ export module Case01 {
 
 		// ID から名前をひくテスト
 		{
-			debugPrefectureId("00");
-			debugPrefectureId("01");
-			debugPrefectureId("02");
-			debugPrefectureId("47");
-			debugPrefectureId("48");
-			debugPrefectureId("");
-			debugPrefectureId("XX");
-		}
-
-		// 列挙するテスト(Map)
-		{
-			console.log("[TARCE] $$$ 列挙するテスト(Map) $$$");
-			const prefs = new Map<string, string>();
-			prefs.set("01", "北海道");
-			prefs.set("02", "青森県");
-			prefs.set("03", "岩手県");
-			prefs.set("04", "宮城県");
-			prefs.set("05", "秋田県");
-			prefs.set("06", "山形県");
-			prefs.forEach((value: string, key: string) => {
-				console.log(`[TRACE] key: [${key}], value: [${value}]`);
-			});
+			tryFindPrefectureById("00");
+			tryFindPrefectureById("01");
+			tryFindPrefectureById("02");
+			tryFindPrefectureById("47");
+			tryFindPrefectureById("48");
+			tryFindPrefectureById("");
+			tryFindPrefectureById("XX");
 		}
 
 		// 列挙するテスト(map)
 		{
 			console.log("[TARCE] $$$ 列挙するテスト(mapped type) $$$");
-			const prefs: { [key: string]: string } = {
-				"01": "北海道",
-				"02": "青森県",
-				"03": "岩手県",
-				"04": "宮城県",
-				"05": "秋田県",
-				"06": "山形県"
-			};
-			for (const key in prefs) {
-				const value = prefs[key];
+			const prefectures = Prefecture.enumPrefectures();
+			for (const key in prefectures) {
+				const value = prefectures[key];
 				console.log(`[TRACE] key: [${key}], value: [${value}]`);
 			}
 

@@ -1,7 +1,7 @@
 /**
  * 配列の spreading
  */
-export module Case02 {
+export module ArraySpreadingTest {
 
 	export function _test(...args: any[]) {
 		console.log(...args);

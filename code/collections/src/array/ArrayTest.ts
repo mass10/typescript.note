@@ -1,7 +1,7 @@
 /**
  * 配列のまわしかた
  */
-export module Case03 {
+export module ArrrayTest {
 
 	export function run() {
 
