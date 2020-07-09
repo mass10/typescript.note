@@ -1,3 +1,36 @@
 settings:
-    phone: 090-8729-1029
-    address: "滋賀県津市中央区市場 中央市場場内A-2 丸升"
+
+    # 電話番号
+    # ダブルクォーテーションで囲んでも囲まなくても結構です。
+    phone: "090-8729-1029"
+
+    # 住所
+    # 終端まで全て含みます。途中に空白を含んでいても構いません。
+    address: 滋賀県津市中央区市場 中央市場場内A-2 丸升
+
+    # 趣味(1)
+    attributes-1:
+        - "drinking"
+        - "music"
+        - "karta"
+        - "sugoroku"
+
+    # 趣味(2)
+    # 趣味(1) と全く同じ内容になります。
+    attributes-2: [
+        "drinking",
+        "music",
+        "karta",
+        "sugoroku"
+    ]
+
+    # * 先頭の空白は取り除かれます。
+    # * 折り返しは一つの空白に置き換わります。
+    sql: "
+SELECT
+    *
+FROM
+    T_PREFERENCES
+WHERE
+    USER_ID = ?
+"

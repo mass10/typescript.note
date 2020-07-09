@@ -21,6 +21,8 @@ function main(): void {
 	console.debug("[TRACE]", conf);
 	console.debug("[TRACE]", conf["settings"]["phone"]);
 	console.debug("[TRACE]", conf["settings"]["address"]);
+	console.debug("[TRACE]", conf["settings"]["attributes-1"]);
+	console.debug("[TRACE]", conf["settings"]["sql"]);
 	console.debug("[TRACE]", conf["undefined-key"]?.["undefined-key"]); // shows undefined
 }
 
