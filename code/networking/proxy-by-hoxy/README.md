@@ -20,7 +20,3 @@ openssl rsa -in ./XXXYYYZZZ.ga.key -out ./XXXYYYZZZ.ga.key
 openssl req -new -key ./XXXYYYZZZ.ga.key -sha256 -out ./XXXYYYZZZ.ga.csr
 openssl x509 -in ./XXXYYYZZZ.ga.csr -days 3650 -req -signkey ./XXXYYYZZZ.ga.key -sha256 -out ./XXXYYYZZZ.ga.crt
 ```
-
-# Issue
-
-- @types/hoxy not provided... ????
