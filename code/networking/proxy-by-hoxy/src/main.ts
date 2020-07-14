@@ -1,7 +1,7 @@
 import fs from "fs";
 import hoxy, { Cycle } from "hoxy";
 
-function get_current_timestamp(): string {
+function getCurrentTimestamp(): string {
 
 	const now = new Date();
 	return now.toISOString();
@@ -10,7 +10,7 @@ function get_current_timestamp(): string {
 function getInterceptionHandler(something: any): hoxy.InterceptionHandler {
 
 	return function (this: hoxy.Proxy, req: hoxy.Request, resp: hoxy.Response, cycle: hoxy.Cycle) {
-		const timestamp = get_current_timestamp();
+		const timestamp = getCurrentTimestamp();
 		console.log(`${timestamp} [TRACE] [${req.method}] ${req.url}`);
 	};
 }
