@@ -104,3 +104,10 @@ yarn add -D @types/node@12
 
 ### 参考
 - https://github.com/electron/electron/issues/21612
+
+# .ts を直接実行する (2020-08-11)
+
+```
+yarn add --dev ts-node
+yarn node makefile.ts
+```
