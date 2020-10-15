@@ -1,0 +1,12 @@
+{
+  "name": "win32",
+  "version": "1.0.0",
+  "main": "dist/Main.js",
+  "license": "MIT",
+  "dependencies": {
+    "win32-api": "^9.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.7"
+  }
+}
