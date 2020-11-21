@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "es5-shim": "^4.5.14",
+    "rollup": "^2.29.0",
+    "typescript": "^4.0.3"
+  },
+  "name": "commonjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}
