@@ -2,28 +2,38 @@ import { appendFileSync } from "fs";
 
 module Lib {
 
-	export function getPrinter(console: Console) {
-
+	/**
+	 * 指定された console に出力を行う logger を返します。
+	 * @param console 
+	 */
+	export function getPrinter1(console: Console): (...args: any[]) => void {
 		const printer = function (...args: any[]): void {
 			console.log(args);
 		};
 		return printer;
 	}
 
-	export function getPrinter2(path: string) {
-
+	/**
+	 * 指定されたファイルに追記する appender を返します。
+	 * @param path ファイルパス
+	 */
+	export function getPrinter2(path: string): (...args: any[]) => void {
 		const printer = function (...args: any[]): void {
 			for (const e of args) {
-				appendFileSync(path, e, { encoding: 'utf-8' });
+				appendFileSync(path, e, { encoding: "utf-8" });
 			}
-			appendFileSync(path, "\n", { encoding: 'utf-8' });
+			appendFileSync(path, "\n", { encoding: "utf-8" });
 		};
 		return printer;
 	}
 
-	export function byBase(n: number) {
+	/**
+	 * 最初に指定された指数によるべき乗を行う関数を返します。
+	 * @param n 指数
+	 */
+	export function POW(n: number): (x: number) => number {
 		return function (x: number): number {
-			return n * x;
+			return x ** n;
 		};
 	}
 }
@@ -40,7 +50,7 @@ module Main {
 
 		// 標準出力を利用した文字列出力の動作確認。
 		{
-			const printer = Lib.getPrinter(console);
+			const printer = Lib.getPrinter1(console);
 			printer("コニチハ");
 			printer("コニチハ");
 			printer("コニチハ");
@@ -58,9 +68,10 @@ module Main {
 
 		// 繰り返す演算を少し簡単にする例。
 		{
-			const operation = Lib.byBase(2);
-			// Shows [ 20, 40, 60 ].
-			console.log([10, 20, 30].map(operation));
+			const pow2 = Lib.POW(2);
+
+			// Shows [ 1, 81, 144 ].
+			console.log([1, 9, 12].map(pow2));
 		}
 	}
 }
