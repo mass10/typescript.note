@@ -1,20 +1,31 @@
 import fs from "fs";
-import hoxy, { Cycle } from "hoxy";
+import hoxy from "hoxy";
 
+/**
+ * 現在のタイムスタンプを返します。
+ * @return タイムスタンプ
+ */
 function getCurrentTimestamp(): string {
 
 	const now = new Date();
 	return now.toISOString();
 }
 
-function getInterceptionHandler(something: any): hoxy.InterceptionHandler {
-
-	return function (this: hoxy.Proxy, req: hoxy.Request, resp: hoxy.Response, cycle: hoxy.Cycle) {
-		const timestamp = getCurrentTimestamp();
-		console.log(`${timestamp} [TRACE] [${req.method}] ${req.url}`);
-	};
+/**
+ * リクエストをインターセプトするハンドラーです。
+ * @param proxy 
+ * @param req 
+ * @param resp 
+ * @param cycle 
+ */
+function onRecvRequest(proxy: hoxy.Proxy, req: hoxy.Request, resp: hoxy.Response, cycle: hoxy.Cycle) {
+	const timestamp = getCurrentTimestamp();
+	console.log(`${timestamp} [TRACE] [${req.method}] ${req.url}`);
 }
 
+/**
+ * エントリーポイントです。
+ */
 function main(): void {
 
 	var proxy = hoxy.createServer({
@@ -25,10 +36,10 @@ function main(): void {
 		}
 	}).listen(443);
 
-	const handler = getInterceptionHandler(null);
 	proxy.intercept({
 		phase: "request"
-	}, handler);
+	}, onRecvRequest);
 }
 
+// ここからスタート
 main();
