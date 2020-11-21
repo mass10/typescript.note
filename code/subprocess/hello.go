@@ -1,8 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"time"
+)
+
+func isContinuous() bool {
+
+	for _, e := range os.Args {
+		if e == "--continuous" {
+			return true
+		}
+	}
+	return false
+}
 
 func main() {
 
-	fmt.Println("[hello.go] Hello!")
+	if !isContinuous() {
+		fmt.Println("[hello.go] Hello!")
+		return
+	}
+	for {
+		fmt.Println("[hello.go] (wait for quit)")
+		time.Sleep(1 * time.Second)
+	}
 }
