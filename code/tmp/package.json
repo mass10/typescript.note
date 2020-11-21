@@ -1,0 +1,14 @@
+{
+  "name": "tmp",
+  "version": "1.0.0",
+  "main": "Main.js",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "@types/command-line-args": "^5.0.0",
+    "command-line-args": "^5.1.1"
+  }
+}
