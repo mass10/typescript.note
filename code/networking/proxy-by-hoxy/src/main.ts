@@ -13,12 +13,11 @@ function getCurrentTimestamp(): string {
 
 /**
  * リクエストをインターセプトするハンドラーです。
- * @param proxy 
  * @param req 
  * @param resp 
  * @param cycle 
  */
-function onRecvRequest(proxy: hoxy.Proxy, req: hoxy.Request, resp: hoxy.Response, cycle: hoxy.Cycle) {
+function onRecvRequest(req: hoxy.Request, resp: hoxy.Response, cycle: hoxy.Cycle) {
 	const timestamp = getCurrentTimestamp();
 	console.log(`${timestamp} [TRACE] [${req.method}] ${req.url}`);
 }
