@@ -1,7 +1,11 @@
 namespace Main {
 
+	function isValidName(name: string): boolean {
+		return 0 <= name?.indexOf("J");
+	}
+
 	function filterUsers(users: string[]): string[] {
-		return users.filter(e => 0 <= e.indexOf("J"));
+		return users.filter(e => isValidName(e));
 	}
 
 	export function main(): void {
