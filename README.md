@@ -109,5 +109,11 @@ yarn add -D @types/node@12
 
 ```
 yarn add --dev ts-node
-yarn node makefile.ts
+yarn ts-node makefile.ts
 ```
+
+# NPM Package を探すときに便利？かもしれないもの Openbase (2021-01-29)
+
+https://openbase.com
+
+* NPM Package の評価サイト、というようなことらしい。
