@@ -1,0 +1,9 @@
+{
+  "name": "overrides",
+  "version": "1.0.0",
+  "main": "dist\\Index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "4.3.0-beta"
+  }
+}
