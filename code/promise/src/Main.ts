@@ -182,6 +182,7 @@ class ContinuousSlowTask {
 		});
 	}
 }
+
 class ErrorTask {
 
 	public run(): Promise<any> {
@@ -191,55 +192,122 @@ class ErrorTask {
 		return task;
 	}
 }
-class Application {
 
-	public async main(): Promise<any> {
+type ConfigurationSettings = {
+    readonly timeout?: number;
+}
 
-		Logger.trace(`### START ###`);
+function getConfigurationSettings(): ConfigurationSettings {
+	const conf = { timeout: 0 } as ConfigurationSettings;
+	return conf;
+}
 
-		// ========== 非同期タスク呼び出し ==========
-		if (false) {
-			const result = await new SafeTask().run().then((result: any) => {
-				Logger.trace(`then: [${result}]`);
-			}).catch((e: any) => {
-				// reject(any) が呼ばれた、あるいは reject() が呼ばれた
-				Logger.trace(`catch: CAUGHT EXCEPTION!`, e);
-			});
-		}
+class UnstableTask {
 
-		if (false) {
-			const result = await new NumberTask().run().then((result: any) => {
-				Logger.trace(`then: [${result}]`);
-			}).catch((e: any) => {
-				// reject(any) が呼ばれた、あるいは reject() が呼ばれた
-				Logger.trace(`catch: CAUGHT EXCEPTION!`, e);
-			});
-		}
+	public runAsync(): Promise<string> {
 
-		// ========== 遅い非同期タスクの呼び出し ==========
-		if (false) {
-			new SlowTask().run().then(() => {
-				Logger.trace("Ok.");
-			}).catch((e: any) => {
-				console.error('[ERROR]', e);
-			})
-		}
+		// 設定
+		const conf = getConfigurationSettings();
 
-		// ========== 遅い非同期タスクを呼び出し(再試行あり) ==========
-		if (true) {
-			Logger.trace('非同期タスク呼び出し');
-			const t = new ContinuousSlowTask().runAsync();
-			Logger.trace('非同期タスクの終了を待っています...');
-			await t.then((result: number) => {
-				Logger.trace(`非同期タスク 終了`);
-			})
-			.catch((reason: any) => {
-				Logger.trace(`catch: [${reason}]`);
-			});
-		}
+		const successInterval = Math.random() * 1000 * 10;
+		// const failureInterval = conf.timeout ?? 5 * 1000;
+		const failureInterval = conf.timeout ? conf.timeout : 5 * 1000;
 
-		Logger.trace(`--- END ---`);
+		Logger.trace(`このセッションのタイムアウト値... timeout: [${conf.timeout}], failureInterval: [${failureInterval}]`);
+
+		const task = new Promise((resolve: (value: string) => void, reject: (reason?: any) => void) => {
+			Logger.trace(`${successInterval} ms で処理中...`);
+			const interval1 = setTimeout(() => {
+				clearTimeout(interval2)
+				Logger.trace('[UnstableTask] 正常終了！')
+				resolve('OK');
+			}, successInterval);
+			const interval2 = setTimeout(() => {
+				clearTimeout(interval1)
+				Logger.error('[UnstableTask] 要求はタイムアウトしました。')
+				reject('要求はタイムアウトしました。');
+			}, failureInterval);
+		});
+		return task;
 	}
 }
 
-new Application().main();
+async function test01(): Promise<void> {
+
+	// ========== 非同期タスク呼び出し ==========
+	const result = await new SafeTask().run().then((result: any) => {
+		Logger.trace(`then: [${result}]`);
+	}).catch((e: any) => {
+		// reject(any) が呼ばれた、あるいは reject() が呼ばれた
+		Logger.trace(`catch: CAUGHT EXCEPTION!`, e);
+	});
+}
+
+async function test02() {
+
+	const result = await new NumberTask().run().then((result: any) => {
+		Logger.trace(`then: [${result}]`);
+	}).catch((e: any) => {
+		// reject(any) が呼ばれた、あるいは reject() が呼ばれた
+		Logger.trace(`catch: CAUGHT EXCEPTION!`, e);
+	});
+}
+
+function test03() {
+
+	new SlowTask().run().then(() => {
+		Logger.trace("Ok.");
+	}).catch((e: any) => {
+		console.error('[ERROR]', e);
+	})
+}
+
+async function test04() {
+
+	Logger.trace('非同期タスク呼び出し');
+	const t = new ContinuousSlowTask().runAsync();
+	Logger.trace('非同期タスクの終了を待っています...');
+	await t.then((result: number) => {
+		Logger.trace(`非同期タスク 終了`);
+	})
+	.catch((reason: any) => {
+		Logger.trace(`catch: [${reason}]`);
+	});
+}
+
+async function test05() {
+
+	Logger.trace('=== ときどき遅延する非同期タスク ===');
+	await new UnstableTask().runAsync()
+	.then((result: string) => {
+		Logger.trace(`非同期タスク: [${result}]`);
+	})
+	.catch((reason: any) => {
+		Logger.trace(`catch: [${reason}]`);
+	});
+	Logger.trace('=== ときどき遅延する非同期タスク 終了 ===');
+}
+
+/**
+ * アプリケーションのエントリーポイントです。
+ */
+function main(): void {
+
+	Logger.trace(`### START ###`);
+
+	// ========== 非同期タスク呼び出し ==========
+	if (false) test01();
+	if (false) test02();
+
+	// ========== 遅い非同期タスクの呼び出し ==========
+	if (false) test03();
+
+	// ========== 遅い非同期タスクを呼び出し(再試行あり) ==========
+	if (false) test04();
+
+	if (true) test05();
+
+	Logger.trace(`--- END ---`);
+}
+
+main();

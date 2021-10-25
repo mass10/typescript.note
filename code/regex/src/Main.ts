@@ -15,6 +15,7 @@ namespace Main {
 
 	/**
 	 * テキストを赤く修飾します。
+	 *
 	 * @param s 
 	 */
 	function red(s: string): string {
@@ -23,6 +24,7 @@ namespace Main {
 
 	/**
 	 * テキストを緑に修飾します。
+	 *
 	 * @param s 
 	 */
 	function green(s: string): string {
@@ -36,6 +38,10 @@ namespace Main {
 	 */
 	function formatResult(b: boolean): string {
 		return b ? green("true") : red("false");
+	}
+
+	function formatResultS(s: string): string {
+		return 0 <= s.indexOf("Invalid") ? red(s) : green("");
 	}
 
 	/**
