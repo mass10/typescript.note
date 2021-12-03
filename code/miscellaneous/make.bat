@@ -1,0 +1,1 @@
+@CALL yarn tsc --build
