@@ -162,9 +162,9 @@ function createProcessEventHandler(memo: string, label: string): ProcessEventhan
 function spawnChildProcess(path: string): boolean {
 	const proc = child_process.spawn(path);
 
-	proc.addListener("error", createProcessEventHandler("child", "error"));
-	proc.addListener("exit", createProcessEventHandler("child", "exit"));
-	proc.addListener("close", createProcessEventHandler("child", "close"));
+	proc.addListener("error", createProcessEventHandler("anonymous", "error"));
+	proc.addListener("exit", createProcessEventHandler("anonymous", "exit"));
+	proc.addListener("close", createProcessEventHandler("anonymous", "close"));
 
 	MyLogger.info("", `プロセスをオープンしました。(${proc.pid})`);
 
@@ -202,10 +202,10 @@ function main(): void {
 	try {
 
 		// Microsoft Edge を開きます。
-		spawnWebBrowser();
+		// spawnWebBrowser();
 
 		// sleep.exe を開きます。
-		// spawnSleepExe();
+		spawnSleepExe();
 
 		// 終了まで少し待機します。
 		setTimeout(() => {
