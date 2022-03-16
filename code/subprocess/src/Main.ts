@@ -103,26 +103,6 @@ class MyLogger {
 	}
 }
 
-class ProcessHandler {
-
-	private readonly _label: string;
-
-	public constructor(label: string) {
-
-		this._label = label;
-	}
-
-	public onFire(error: child_process.ExecException | null, stdout: string, stderr: string) {
-
-		MyLogger.info("", "======================================================");
-		MyLogger.info("", "EVENT: [" + this._label + "]");
-		MyLogger.info("", "ERROR:", error);
-		MyLogger.info("", "STDOUT:", stdout);
-		MyLogger.info("", "STDERR:", stderr);
-		MyLogger.info("", "");
-	}
-}
-
 function process_handler(error: child_process.ExecException | null, stdout: string, stderr: string): void {
 
 	MyLogger.info("", "ERROR:", error);
@@ -151,27 +131,46 @@ function call_hello(): boolean {
 	return false;
 }
 
+/**
+ * プロセスイベントハンドラー
+ */
+type ProcessEventhandler = (error: child_process.ExecException | null, stdout: string, stderr: string) => void;
+
+/**
+ * プロセスイベントハンドラーを返します。
+ *
+ * @param label このハンドラに関連付けるラベル文字列
+ * @returns プロセスイベントハンドラー
+ */
+function createProcessEventHandler(label: string): ProcessEventhandler {
+	return (error: child_process.ExecException | null, stdout: string, stderr: string) => {
+		MyLogger.info("", "======================================================");
+		MyLogger.info("", "EVENT: [" + label + "]");
+		MyLogger.info("", "ERROR:", error);
+		MyLogger.info("", "STDOUT:", stdout);
+		MyLogger.info("", "STDERR:", stderr);
+	};
+}
+
 function call_msedge(): boolean {
 
 	const path = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
 	// const path = "modules\\sleep.exe";
 
+	// プロセスを起動
 	const proc = child_process.spawn(path);
 
-	const errorHandler = new ProcessHandler("error")
-	const exitHandler = new ProcessHandler("exit")
-	const closeHandler = new ProcessHandler("close")
-
-	proc.addListener("error", errorHandler.onFire.bind(errorHandler));
-	proc.addListener("exit", exitHandler.onFire.bind(exitHandler));
-	proc.addListener("close", closeHandler.onFire.bind(closeHandler));
+	proc.addListener("error", createProcessEventHandler("error"));
+	proc.addListener("exit", createProcessEventHandler("exit"));
+	proc.addListener("close", createProcessEventHandler("close"));
 
 	MyLogger.info("", `プロセスをオープンしました。(${proc.pid})`);
 
-	if (proc) {
-		return true;
+	if (!proc) {
+		return false;
 	}
-	return false;
+
+	return true;
 }
 
 function main(): void {
