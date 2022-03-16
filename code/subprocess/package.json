@@ -1,7 +1,7 @@
 {
   "name": "subprocess",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/Main.js",
   "license": "MIT",
   "dependencies": {
     "@types/node": "^13.9.1",
