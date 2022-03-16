@@ -139,30 +139,32 @@ type ProcessEventhandler = (error: child_process.ExecException | null, stdout: s
 /**
  * プロセスイベントハンドラーを返します。
  *
- * @param label このハンドラに関連付けるラベル文字列
+ * @param memo このハンドラに関連付けるメモ
+ * @param label このハンドラに関連付けるラベル
  * @returns プロセスイベントハンドラー
  */
-function createProcessEventHandler(label: string): ProcessEventhandler {
+function createProcessEventHandler(memo: string, label: string): ProcessEventhandler {
 	return (error: child_process.ExecException | null, stdout: string, stderr: string) => {
-		MyLogger.info("", "======================================================");
-		MyLogger.info("", "EVENT: [" + label + "]");
-		MyLogger.info("", "ERROR:", error);
-		MyLogger.info("", "STDOUT:", stdout);
-		MyLogger.info("", "STDERR:", stderr);
+		MyLogger.info(memo, "======================================================");
+		MyLogger.info(memo, "EVENT: [" + label + "]");
+		MyLogger.info(memo, "ERROR:", error);
+		MyLogger.info(memo, "STDOUT:", stdout);
+		MyLogger.info(memo, "STDERR:", stderr);
 	};
 }
 
-function call_msedge(): boolean {
-
-	const path = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
-	// const path = "modules\\sleep.exe";
-
-	// プロセスを起動
+/**
+ * 外部プロセスを開きます。
+ *
+ * @param path ファイルパス
+ * @returns 成否
+ */
+function spawnChildProcess(path: string): boolean {
 	const proc = child_process.spawn(path);
 
-	proc.addListener("error", createProcessEventHandler("error"));
-	proc.addListener("exit", createProcessEventHandler("exit"));
-	proc.addListener("close", createProcessEventHandler("close"));
+	proc.addListener("error", createProcessEventHandler("child", "error"));
+	proc.addListener("exit", createProcessEventHandler("child", "exit"));
+	proc.addListener("close", createProcessEventHandler("child", "close"));
 
 	MyLogger.info("", `プロセスをオープンしました。(${proc.pid})`);
 
@@ -173,6 +175,26 @@ function call_msedge(): boolean {
 	return true;
 }
 
+/**
+ * ウェブブラウザーを開きます。
+ *
+ * @returns 成否
+ */
+function spawnWebBrowser(): boolean {
+	const path = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
+	return spawnChildProcess(path)
+}
+
+/**
+ * 待機プロセスを開きます。
+ *
+ * @returns 成否
+ */
+function spawnSleepExe(): boolean {
+	const path = "modules\\sleep.exe";
+	return spawnChildProcess(path)
+}
+
 function main(): void {
 
 	MyLogger.info("", `### START ### (${process.pid})`);
@@ -180,9 +202,10 @@ function main(): void {
 	try {
 
 		// Microsoft Edge を開きます。
-		if (!call_msedge()) {
-			return;
-		}
+		spawnWebBrowser();
+
+		// sleep.exe を開きます。
+		// spawnSleepExe();
 
 		// 終了まで少し待機します。
 		setTimeout(() => {
