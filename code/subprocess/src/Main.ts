@@ -29,15 +29,16 @@ function getCurrentTimestamp(): string {
  * @param category 
  * @param args 
  */
-async function writeLog(
-	level: string,
-	category: string,
-	...args: any
-): Promise<any> {
+async function writeLog(level: string, category: string, ...args: any): Promise<any> {
+
+	// ロギングカテゴリー
 	if (!category) {
 		category = "default";
 	}
+
+	// プロセスの ID
 	const pid = process.pid;
+
 	if (level === 'debug') {
 		if (args.length < 2) {
 			console.debug(`${getCurrentTimestamp()} (${pid}) [${level}][${category}] ${args}`);
@@ -139,17 +140,17 @@ type ProcessEventhandler = (error: child_process.ExecException | null, stdout: s
 /**
  * プロセスイベントハンドラーを返します。
  *
- * @param memo このハンドラに関連付けるメモ
- * @param label このハンドラに関連付けるラベル
+ * @param category このハンドラに関連付けるカテゴリー
+ * @param event このハンドラに関連付けるイベント
  * @returns プロセスイベントハンドラー
  */
-function createProcessEventHandler(memo: string, label: string): ProcessEventhandler {
+function createProcessEventHandler(category: string, event: string): ProcessEventhandler {
 	return (error: child_process.ExecException | null, stdout: string, stderr: string) => {
-		MyLogger.info(memo, "======================================================");
-		MyLogger.info(memo, "EVENT: [" + label + "]");
-		MyLogger.info(memo, "ERROR:", error);
-		MyLogger.info(memo, "STDOUT:", stdout);
-		MyLogger.info(memo, "STDERR:", stderr);
+		MyLogger.info(category, "======================================================");
+		MyLogger.info(category, "EVENT: [" + event + "]");
+		MyLogger.info(category, "ERROR:", error);
+		MyLogger.info(category, "STDOUT:", stdout);
+		MyLogger.info(category, "STDERR:", stderr);
 	};
 }
 
@@ -159,8 +160,8 @@ function createProcessEventHandler(memo: string, label: string): ProcessEventhan
  * @param path ファイルパス
  * @returns 成否
  */
-function spawnChildProcess(path: string): boolean {
-	const proc = child_process.spawn(path);
+function spawnChildProcess(path: string, ...args: string[]): boolean {
+	const proc = child_process.spawn(path, args);
 
 	proc.addListener("error", createProcessEventHandler("anonymous", "error"));
 	proc.addListener("exit", createProcessEventHandler("anonymous", "exit"));
@@ -182,7 +183,7 @@ function spawnChildProcess(path: string): boolean {
  */
 function spawnWebBrowser(): boolean {
 	const path = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
-	return spawnChildProcess(path)
+	return spawnChildProcess(path, url)
 }
 
 /**
@@ -191,7 +192,8 @@ function spawnWebBrowser(): boolean {
  * @returns 成否
  */
 function spawnSleepExe(): boolean {
-	const path = "modules\\sleep.exe";
+	// const path = "modules\\sleep.exe";
+	const path = "C:\\Program Files\\Internet Explorer\\iexplore.exe";
 	return spawnChildProcess(path)
 }
 
@@ -202,10 +204,10 @@ function main(): void {
 	try {
 
 		// Microsoft Edge を開きます。
-		// spawnWebBrowser();
+		spawnWebBrowser();
 
 		// sleep.exe を開きます。
-		spawnSleepExe();
+		// spawnSleepExe();
 
 		// 終了まで少し待機します。
 		setTimeout(() => {
