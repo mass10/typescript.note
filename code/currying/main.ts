@@ -36,6 +36,17 @@ module Lib {
 			return x ** n;
 		};
 	}
+
+	/**
+	 * 引き算をする関数を返します。
+	 * @param n 
+	 * @returns 
+	 */
+	export function subtract(n: number): (right: number) => number {
+		return function (right: number): number {
+			return n - right;
+		};
+	}
 }
 
 /**
@@ -72,6 +83,15 @@ module Main {
 
 			// Shows [ 1, 81, 144 ].
 			console.log([1, 9, 12].map(pow2));
+		}
+
+		// subtract を少し簡単にする例。
+		{
+			const subtract = Lib.subtract;
+			console.log("[DEBUG] 引き算", subtract(10)(5));
+			console.log("[DEBUG] 引き算", subtract(1)(1));
+			console.log("[DEBUG] 引き算", subtract(100)(0));
+
 		}
 	}
 }
