@@ -1,32 +1,50 @@
 // 要素の集合に対して名前を付けています。
-type application_common_parameter = {
+type ApplicationStartupParameter = {
+	/**
+	 * なんらかの ID
+	 */
 	id: string,
+	/**
+	 * なんらかの説明文
+	 */
 	description: string
 };
 
-class application {
+type Pixel = `${number}px`;
 
-	public run(s: application_common_parameter) {
+/**
+ * アプリケーション本体クラス
+ */
+class Application {
+
+	public run(s: ApplicationStartupParameter) {
 		console.log("[TRACE] ", s);
 	}
 }
 
-function _main() {
+function setPixel(p: Pixel): void {
+	console.log(p);
+}
 
-	const app = new application();
+/**
+ * アプリケーションのエントリーポイントです。
+ */
+function main() {
 
-	// パラメータとして許容される型(1)
+	const app = new Application();
+
+	// パラメータとして許容されるオブジェクト(1)
 	{
-		const valid_struct1 = {
+		const validStruct1 = {
 			id: "395b7021-4e61-46e0-83fb-4effec50e252",
 			description: "説明です。"
 		}
-		app.run(valid_struct1);
+		app.run(validStruct1);
 	}
 
-	// パラメータとして許容される型(2)
+	// パラメータとして許容されるオブジェクト(2)
 	{
-		const valid_struct2 = {
+		const validStruct2 = {
 			id: "395b7021-4e61-46e0-83fb-4effec50e252",
 			description: "このオブジェクトの説明",
 			title: "タイトル",
@@ -35,25 +53,33 @@ function _main() {
 				key2: 8080
 			}
 		}
-		app.run(valid_struct2);
+		app.run(validStruct2);
 	}
 
 	// パラメータとして許容されない型(1)
 	{
-		const invalid_struct1 = {
+		const invalidParameter = {
 			batch_id: "a4c95a01-66bb-45f7-82f4-c0131af57d20",
 			description: "このオブジェクトの説明文字列"
 		};
-		// app.run(invalid_struct1);
+		// app.run(invalidParameter);
 	}
 
 	// パラメータとして許容されない型(2)
 	{
-		const invalid_struct1 = {
+		const invalidParameter = {
 			id: "b247e10a-65e4-4c2d-b10f-f41ff1eb3e09"
 		};
-		// app.run(invalid_struct1);
+		// app.run(invalidParameter);
+	}
+
+	{
+		setPixel("100px");
+
+		// Compilation error!
+		// Argument of type '"100"' is not assignable to parameter of type '`${number}px`'.
+		// setPixel("100");
 	}
 }
 
-_main();
+main();
