@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "electron": "^13.6.6",
+    "electron": "^15.5.5",
     "typescript": "^3.8.3"
   },
   "devDependencies": {
