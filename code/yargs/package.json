@@ -1,0 +1,13 @@
+{
+  "name": "yargs-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "@types/yargs": "^17.0.11",
+    "yargs": "^15.3.1"
+  }
+}
